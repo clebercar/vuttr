@@ -1,9 +1,13 @@
-const express = require("express")
+const express = require('express')
+const consign = require('consign')
 const app = express()
 
-require("./database")("cleber:cleber123@ds147446.mlab.com:47446/vuttr");
+require('./database')
 
 app.use(express.json())
-app.use(require('../routes'))
+
+consign()
+  .include('routes')
+  .into(app)
 
 module.exports = app

@@ -1,6 +1,4 @@
 const app = require('./config')
-const http =  require('http')
+const server = require('http').Server(app)
 
-http.createServer(app).listen("3000", function(){
-    console.log('Server started on port 3000');
-});
+server.listen(3000, () => console.log('Server started on port 3000'))
