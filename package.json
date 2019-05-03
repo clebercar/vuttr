@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "consign": "^0.1.6",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.3"
   },
   "devDependencies": {
@@ -12,9 +14,13 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.7.1",
     "nodemon": "^1.18.11"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js ignore __tests__",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test config/database-test.js"
   }
 }
