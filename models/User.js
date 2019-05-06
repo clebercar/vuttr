@@ -15,7 +15,10 @@ const User = new mongoose.Schema({
 
 User.pre('save', async function (next) {
   this.password_hash = await bcrypt.hash(this.password, 8)
+  next()
 })
+
+User.post('save', () => mongoose.disconnect())
 
 User.methods.checkPassword = (password) => {
   return bcrypt.compare(password, this.password_hash)
