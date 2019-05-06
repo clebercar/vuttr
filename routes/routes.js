@@ -1,5 +1,6 @@
 const ToolController = require('../controllers/ToolController')
 const UserController = require('../controllers/UserController')
+const SessionController = require('../controllers/SessionController')
 
 module.exports = app => {
   app.route('/tools')
@@ -17,4 +18,7 @@ module.exports = app => {
   app.route('/users/:id')
     .get(UserController.show.bind(UserController))
     .delete(UserController.destroy.bind(UserController))
+
+  app.route('/sessions')
+    .post(SessionController.store.bind(SessionController))
 }
