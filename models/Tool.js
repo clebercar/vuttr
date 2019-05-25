@@ -1,14 +1,12 @@
-const mongoose = require('mongoose')
-
-const ToolSchema = new mongoose.Schema({
+const ToolSchema = new db.Schema({
   title: String,
   link: String,
   description: String,
-  tags: [String],
-  createAt: {
-    type: Date,
-    default: Date.now
+  tags: [String]
+}, {
+  timestamps: {
+    createdAt: 'created_at'
   }
 })
 
-module.exports = mongoose.model('Tool', ToolSchema)
+module.exports = db.model('Tool', ToolSchema)
