@@ -1,13 +1,9 @@
-const express = require('express')
-const consign = require('consign')
-const app = express()
-
 require('./database')
 
-app.use(express.json())
+const express = require('express')
+const app = express()
 
-consign()
-  .include('routes')
-  .into(app)
+app.use(express.json())
+app.use(require('../routes/routes'))
 
 module.exports = app
