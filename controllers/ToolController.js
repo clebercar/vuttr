@@ -3,8 +3,8 @@ const Tool = require('../models/Tool')
 class ToolController {
   async index (req, res) {
     let tools = await Tool
-      .find({}, '-createAt -__v')
-      .sort('-createAt')
+      .find({})
+      .sort({ created_at: -1 })
 
     if (req.query.tag) {
       tools = tools.filter((el) => el.tags.indexOf(req.query.tag) > -1)

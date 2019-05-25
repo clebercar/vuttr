@@ -3,12 +3,8 @@ const User = require('../models/User')
 class UserController {
   async index (req, res) {
     let users = await User
-      .find({}, '-createAt -__v')
-      .sort('-createAt')
-
-    if (req.query.tag) {
-      users = users.filter((el) => el.tags.indexOf(req.query.tag) > -1)
-    }
+      .find({})
+      .sort({ created_at: -1 })
 
     return res.json(users)
   }
