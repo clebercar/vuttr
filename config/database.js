@@ -1,16 +1,14 @@
-require('dotenv').config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
-})
-
 const mongoose = require('mongoose')
+const uri = require('./database-uri')
 
-const DB_USER = process.env.DB_USER
-const DB_PASS = process.env.DB_PASS
-const DB_HOST = process.env.DB_HOST
+global.db = (global.db ? global.db : mongoose)
 
-const uri = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}`
-mongoose.connect(uri, {
+db.connect(uri, {
   useNewUrlParser: true
+}).then(result => {
+  console.log('MongoDB Conectado', uri)
+}).catch(error => {
+  console.log(error)
 })
 
-module.exports = mongoose
+module.exports = uri
