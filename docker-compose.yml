@@ -1,0 +1,20 @@
+version: "3"
+services:
+  api:
+    container_name: api-vuttr
+    build: .
+    command: yarn dev
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+      - 9229:9229
+    depends_on:
+      - db
+  db:
+    container_name: db-vuttr
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
