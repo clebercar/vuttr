@@ -12,10 +12,13 @@ factory.define('User', User, {
 
 const generateTags = () => {
   const tags = []
-  let count = faker.random.number()
+  let count = faker.random.number({
+    'min': 5,
+    'max': 10
+  })
 
   while (count > 0) {
-    tags.push()
+    tags.push(faker.lorem.word())
     count--
   }
 
@@ -26,7 +29,7 @@ factory.define('Tool', Tool, {
   title: faker.name.title(),
   link: faker.internet.url(),
   description: faker.lorem.text(),
-  tags: generateTags
+  tags: generateTags()
 })
 
 module.exports = factory
