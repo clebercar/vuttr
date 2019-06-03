@@ -3,9 +3,9 @@ module.exports = (array) => {
     let exp = ''
 
     if (index < 1) {
-      exp += `faq=${current}`
+      exp += `tag=${current}`
     } else {
-      exp += previous + `&faq=${current}`
+      exp += previous + `&tag=${current}`
     }
 
     return exp
