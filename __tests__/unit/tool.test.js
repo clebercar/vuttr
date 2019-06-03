@@ -2,7 +2,7 @@ const factory = require('../factories')
 const faker = require('faker')
 const Tool = require('../../models/Tool')
 
-describe('User', () => {
+describe('Tool', () => {
   let tool
 
   describe('CREATE', () => {
@@ -10,7 +10,7 @@ describe('User', () => {
       tool = await factory.create('Tool')
     })
 
-    it('should create a user', async () => {
+    it('should create a tool', async () => {
       const createdTool = await Tool.findOne({ name: tool.name })
 
       expect(tool._id).toEqual(createdTool._id)
@@ -22,7 +22,7 @@ describe('User', () => {
       tool = await factory.create('Tool')
     })
 
-    it('should update name of user', async () => {
+    it('should update title of tool', async () => {
       const toolUpdate = await tool.updateOne({ title: faker.name.findName() })
 
       expect(toolUpdate.title).not.toBe(tool.title)
@@ -34,7 +34,7 @@ describe('User', () => {
       tool = await factory.create('Tool')
     })
 
-    it('should delete a user', async () => {
+    it('should delete a tool', async () => {
       const toolDelete = await tool.deleteOne({ id: tool._id })
       const toolExist = await Tool.findOne({ id: toolDelete._id })
 
@@ -47,7 +47,7 @@ describe('User', () => {
       await factory.createMany('Tool', 50)
     })
 
-    it('should return all users created', async () => {
+    it('should return all tools created', async () => {
       const allTools = await Tool.find({})
 
       expect(allTools.length).toEqual(50)
