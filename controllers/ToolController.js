@@ -2,12 +2,11 @@ const Tool = require('../models/Tool')
 
 class ToolController {
   async index (req, res) {
-    let tools = await Tool
-      .find({})
-      .sort({ created_at: -1 })
+    let tools
+    tools = await this.findTool()
 
     if (req.query.tag) {
-      tools = tools.filter((el) => el.tags.indexOf(req.query.tag) > -1)
+      tools = await this.findTool({ 'tags': { $in: req.query.tag } })
     }
 
     return res.json(tools)
@@ -20,23 +19,17 @@ class ToolController {
   }
 
   async show (req, res) {
-    const tool = await Tool.findById(req.params.id,
-      (err, tool) => {
-        this.verifyResultQuery(res, err, tool)
-      })
-
-    return res.json(tool)
+    await Tool.findById(req.params.id, (err, tool) => {
+      this.verifyResultQuery(res, err, tool)
+    })
   }
 
   async destroy (req, res) {
     const id = req.params.id
 
-    Tool.findByIdAndDelete(id,
-      (err, tool) => {
-        this.verifyResultQuery(res, err, tool)
-      })
-
-    return res.sendStatus(200)
+    await Tool.findByIdAndDelete(id, (err, tool) => {
+      this.verifyResultQuery(res, err, tool)
+    })
   }
 
   verifyResultQuery (res, err, tool) {
@@ -46,6 +39,7 @@ class ToolController {
         msg: 'an error has occurred'
       })
     }
+
     if (!tool) {
       return res
         .status(404)
@@ -54,6 +48,16 @@ class ToolController {
           msg: 'Tool not found'
         })
     }
+
+    return res.status(200).json(tool)
+  }
+
+  async findTool (obj = {}) {
+    let tools = await Tool
+      .find(obj)
+      .sort({ created_at: -1 })
+
+    return tools
   }
 }
 
