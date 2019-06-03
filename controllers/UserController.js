@@ -16,23 +16,15 @@ class UserController {
   }
 
   async show (req, res) {
-    const user = await User.findById(req.params.id,
-      (err, user) => {
-        this.verifyResultQuery(res, err, user)
-      })
-
-    return res.json(user)
+    await User.findById(req.params.id, (err, user) => {
+      this.verifyResultQuery(res, err, user)
+    })
   }
 
   async destroy (req, res) {
-    const id = req.params.id
-
-    User.findByIdAndDelete(id,
-      (err, user) => {
-        this.verifyResultQuery(res, err, user)
-      })
-
-    return res.sendStatus(200)
+    User.findByIdAndDelete(req.params.id, (err, user) => {
+      this.verifyResultQuery(res, err, user)
+    })
   }
 
   verifyResultQuery (res, err, user) {
@@ -42,6 +34,7 @@ class UserController {
         msg: 'an error has occurred'
       })
     }
+
     if (!user) {
       return res
         .status(404)
@@ -50,6 +43,8 @@ class UserController {
           msg: 'User not found'
         })
     }
+
+    return res.status(200).json(user)
   }
 }
 
