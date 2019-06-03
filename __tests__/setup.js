@@ -5,7 +5,9 @@ jest.setTimeout(1000000)
 beforeEach(function (done) {
   function clearDB () {
     for (var i in db.connection.collections) {
-      db.connection.collections[i].remove(function () {})
+      db.connection.collections[i].deleteOne(function (err) {
+        if (err) console.log('Could not delete collection')
+      })
     }
     return done()
   }
