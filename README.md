@@ -26,7 +26,7 @@ cp .env.test.example .env.test
 Start the application with docker-compose
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 You can now access the project from port 3000
