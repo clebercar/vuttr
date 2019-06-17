@@ -1,0 +1,166 @@
+FORMAT: 1A
+HOST: http://api.sample.com.br/v1
+
+# VUTTR
+
+Project description.
+
+# Group About
+
+API consists of a set of routes that are able to list, register, and delete tools.
+
+# Group Resources
+
+## Tools [/tools]
+
+### Create tool [POST]
+
++ Request Create a Tool
+
+    + Headers
+
+            Authorization: Bearer JWT
+            Content-Type: application/json
+    + Body
+
+            {
+                "tags": ["tarefas", "organização", "atividades", "produtividade"],
+                "title": "Trello",
+                "link": "https://trello.info/",
+                "description": "Trello é um aplicativo de gerenciamento de projeto."
+            }
+
+
++ Response 200 (application/json)
+    + Body
+
+                {
+                    "tags": [
+                        "tarefas",
+                        "organização",
+                        "atividades",
+                        "produtividade"
+                    ],
+                    "_id": "5d06f0b1204e7f0045388989",
+                    "title": "Trello",
+                    "link": "https://trello.info/",
+                    "description": "Trello é um aplicativo de gerenciamento de projeto",
+                    "created_at": "2019-06-17T01:45:21.543Z",
+                    "updatedAt": "2019-06-17T01:45:21.543Z",
+                    "__v": 0
+                }
+
+### List all tools [GET]
+
++ Request List all tools
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                {
+                    "tags": [
+                        "tarefas",
+                        "organização",
+                        "atividades",
+                        "produtividade"
+                    ],
+                    "_id": "5d06f0b1204e7f0045388989",
+                    "title": "Trello",
+                    "link": "https://trello.info/",
+                    "description": "Trello é um aplicativo de gerenciamento de projeto",
+                    "created_at": "2019-06-17T01:45:21.543Z",
+                    "updatedAt": "2019-06-17T01:45:21.543Z",
+                    "__v": 0
+                }
+            ]
+
++ Response 401 (application/json)
+    + Body
+
+            {
+                "message": "Token not provided"
+            }
+
+## List tools by tag [/tools{?tag}]
+
++ Parameters
+    + tag: tarefas&tag=missão (string, optional) - The name of tag.
+
+### List all the tools that contain the tag [GET]
+
++ Request List all tools
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Body
+
+            [
+                {
+                    "tags": [
+                        "tarefas",
+                        "organização",
+                        "atividades",
+                        "produtividade"
+                    ],
+                    "_id": "5d06f0b1204e7f0045388989",
+                    "title": "Trello",
+                    "link": "https://trello.info/",
+                    "description": "Trello é um aplicativo de gerenciamento de projeto",
+                    "created_at": "2019-06-17T01:45:21.543Z",
+                    "updatedAt": "2019-06-17T01:45:21.543Z",
+                    "__v": 0
+                },
+                {
+                    "tags": [
+                        "missão",
+                        "organização",
+                        "gestão",
+                        "produtividade"
+                    ],
+                    "_id": "5d06f0b1204e7f0045388990",
+                    "title": "GitHub",
+                    "link": "https://github.com/",
+                    "description": "GitHub é uma plataforma de hospedagem de código-fonte com controle de versão usando o Git.",
+                    "created_at": "2019-05-17T01:45:21.543Z",
+                    "updatedAt": "2019-05-17T01:45:21.543Z",
+                    "__v": 0
+                }
+            ]
+
++ Response 401 (application/json)
+    + Body
+
+            {
+                "message": "Token not provided"
+            }
+
+## Delete tool [/tool/{id}]
+
++ Parameters
+    + id: 1 (number) - ID of tool
+
+### Delete tool by ID [DELETE]
+
++ Request
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Body
+
+            {}
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "success": false,
+                "msg": "an error has occurred"
+            }
