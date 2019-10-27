@@ -34,10 +34,12 @@ class ToolController {
 
   verifyResultQuery (res, err, tool) {
     if (err) {
-      return res.json({
-        success: false,
-        msg: 'an error has occurred'
-      })
+      return res
+        .status(400)
+        .json({
+          success: false,
+          msg: 'an error has occurred'
+        })
     }
 
     if (!tool) {
