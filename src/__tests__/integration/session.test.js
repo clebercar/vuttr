@@ -7,7 +7,6 @@ describe('Authentication', () => {
     await factory.create('User')
 
     const userAttrs = await factory.attrs('User')
-      .then(attributes => attributes)
 
     const response = await request(app)
       .post('/sessions')
@@ -33,7 +32,6 @@ describe('Authentication', () => {
     await factory.create('User')
 
     const userAttrs = await factory.attrs('User')
-      .then(attributes => attributes)
 
     const response = await request(app)
       .post('/sessions')
