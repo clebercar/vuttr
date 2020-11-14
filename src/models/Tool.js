@@ -1,4 +1,6 @@
-const ToolSchema = new db.Schema({
+const mongoose = require('mongoose')
+
+const ToolSchema = new mongoose.Schema({
   title: String,
   link: String,
   description: String,
@@ -9,4 +11,4 @@ const ToolSchema = new db.Schema({
   }
 })
 
-module.exports = db.model('Tool', ToolSchema)
+module.exports = mongoose.model('Tool', ToolSchema)

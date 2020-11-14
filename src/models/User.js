@@ -1,7 +1,8 @@
+const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const User = new db.Schema({
+const User = new mongoose.Schema({
   name: String,
   email: String,
   password_hash: String
@@ -37,4 +38,4 @@ User.methods.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.APP_SECRET)
 }
 
-module.exports = db.model('User', User)
+module.exports = mongoose.model('User', User)
