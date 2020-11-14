@@ -1,15 +1,13 @@
-FROM node:10
+FROM node:14.15
 
-WORKDIR /app
+ENV HOME=/app
 
-COPY package*.json ./
+WORKDIR $HOME
 
-RUN npm install -g yarn nodemon
+COPY package.json yarn.lock $HOME/
 
-RUN yarn install
+RUN yarn && yarn cache clean
 
-COPY . .
+EXPOSE 3000
 
-EXPOSE 8080
-
-CMD [ "npm", "run", "start" ]
+CMD [ "yarn", "dev" ]

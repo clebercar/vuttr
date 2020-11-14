@@ -3,7 +3,7 @@ services:
   api:
     container_name: api-vuttr
     build: .
-    command: yarn dev
+    command: sh -c "yarn && yarn dev"
     volumes:
       - ./:/app
     ports:
@@ -15,6 +15,6 @@ services:
     container_name: db-vuttr
     image: mongo
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
-      - ./data/db:/data/db
+      - ./tmp/mongodb:/data/db
